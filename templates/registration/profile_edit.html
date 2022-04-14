@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block body %}
+<div class="row mt-4 " style="margin-bottom: 300px;">
+    <div class="col-md-3">
+          </div> 
+            <div class="col-md-6">
+                
+                <form method="post" action="" enctype="multipart/form-data" >
+                    <h5 class="mt-4" style="text-align: right;">تعديل البيانات الشخصية </h5>
+                    {% csrf_token %}
+                    {% bootstrap_form userforms %}
+                    {% if request.user.profile.image%}
+                    <img style="width: 100px;height: 100px;" src="{{request.user.profile.image.url}}" alt="">
+                    {%else%}
+                    <img style="width: 100px;height: 100px;" src="  {% static 'default_image/img_product/no image here.png'%}" alt="">
+
+                    {%endif%}
+                    {% bootstrap_form profileforms %}
+
+                    <input type="submit" value="تعديل" class="btn btn-primary w-100" />
+                  </form>
+                
+                </div> 
+        <div class="col-md-3">
+        
+            </div> 
+                        
+</div>
+{% endblock body%}

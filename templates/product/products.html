@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{%block body%}
+ <!--start body-->
+      <div class="row">
+        <div class="col-md-8  border">
+          {% include 'partials/_alert.html'%}
+
+            <div class="row">
+                    <!--start product-->
+                    
+              {% for product in products%}
+              <div class="col-md-4 mb-2 mt-2" style="text-align: right; color:black;border: 1px solid rgb(218, 80, 16);">
+
+                <a href="{% url 'detail_product' product.id %}" style="text-decoration: none; " >
+                  {% if product.PRDimage  %}
+                  <img src="{{product.PRDimage.url}}" style="height: 150px;width:100%;">
+                  {%else%}
+                  <img src="  {% static 'default_image/img_product/no image here.png'%}" style="height: 150px;width:100%;">
+                  {%endif%}
+                  {% if product.PRDisnew %}
+                  <a class="btn btn-primary mt-2" href="">new</a>
+                  {% endif %}
+                  {% if product.PRDdiscountprice > 0 %}
+                  <a class="btn mt-2" style="background-color: green; color:white" href="">sale</a>
+                  {% endif %}
+                  {% if product.PRDisbeatsaller %}     
+                  <a class="btn mt-2" style="background-color: red; color:white" href="">bestsaller</a>
+                  {% endif %}
+                  <a class="btn mt-2" style="background-color: red; color:white" href="{% url 'add_favorite_product' product.id%}"><i class="far fa-heart"></i></a>
+
+                    <p style="color:black;margin-top: 10px;"> {{product.PRDname}}</p>
+                </a>
+
+                <p>product id = {{product.id}}</p>
+                <p>product review = {{product.PRDreview}}</p>
+                <p> free_shipping = {{product.free_shipping}}</p>
+
+                <p >
+                  <p style="display: inline-block;">جنيه</p> 
+                  <p style="display: inline-block;">{{product.PRDprice}}</p>
+                </p>
+
+              </div>
+            {% endfor%}
+        <!--end product-->
+            </div> 
+        </div>
+        <div class="col-md-4 mt-3" style="text-align: right;">
+            <form action="" method="get">
+              <h5>مؤهل للشحن المجاني</h5>
+              <div class="form-check mb-2">
+                <input  class="form-check-input" name="free_shipping" type="checkbox"  id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                  الشحن المجاني
+                </label>
+
+              </div>
+              <!-- start review-->
+              <h5>معدل التقييم  </h5>
+                <div class="form-check form-check-inline">
+                  <input  value="1" class="form-check-input" type="radio" name="star" id="inlineRadio1" value="option1">
+                  <label class="form-check-label" for="inlineRadio1"><i style="color:rgb(199, 102, 23)" class="fas fa-star"></i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input  value="2" class="form-check-input" type="radio" name="star" id="inlineRadio1" value="option1">
+                  <label class="form-check-label" for="inlineRadio1">
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 15px;" class="fas fa-star fa-1x	" ></i>
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 15px;" class="fas fa-star fa-1x	" ></i>
+
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input  value="3" class="form-check-input" type="radio" name="star" id="inlineRadio1" value="option1">
+                  <label class="form-check-label" for="inlineRadio1">
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 13px;" class="fas fa-star fa-1x	" ></i>
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 13px;" class="fas fa-star fa-1x	" ></i>
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 13px;" class="fas fa-star fa-1x	" ></i>
+
+                </div>
+                <div class="form-check form-check-inline">
+                  <input  value="4" class="form-check-input" type="radio" name="star" id="inlineRadio1" value="option1">
+                  <label class="form-check-label" for="inlineRadio1">
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+                    <br>
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+
+                </div>
+                <div class="form-check form-check-inline">
+                  <input  value="5" class="form-check-input" type="radio" name="star" id="inlineRadio1" value="option1">
+                  <label class="form-check-label" for="inlineRadio1">
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 10px;" class="fas fa-star fa-1x	" ></i>
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+                    <br>
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+                    <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+
+                  </label>
+                </div>
+                <!-- end review-->
+                <h5> السعر  </h5>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">الي</label>
+                    <input name="price_to" type="number" class="form-control" id="inputEmail4">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">من</label>
+                    <input name="price_from" type="number" class="form-control" id="inputPassword4">
+                  </div>
+                
+                </div>
+              <button class="btn btn-primary" name="btn_seach">بحث</button>
+            </form>
+          </div>
+       
+      </div>
+  
+      <!--start paginator-->
+      {% if products.has_other_pages%}
+      <div class="row  mb-3">
+            <div class="col-md-12  border " style="padding-left: 40%;" >
+                <!--sart pagination-->
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    {% if products.has_previous  %}
+                    <li class="page-item"><a class="page-link" 
+                      href="?page={{products.previous_page_number}}">السابق</a></li>
+                    {% else %}
+                    <li class="page-item disabled"><a class="page-link" href="#" >السابق</a></li>
+                    {% endif%}
+                    
+
+                    {% for page_number in products.paginator.page_range %}
+
+                    <li class="page-item"><a class="page-link" 
+                      href="?page={{page_number}}">{{page_number}}</a></li>
+                    
+                    {% endfor %}
+
+                    {% if products.has_next%}
+                    <li class="page-item"><a class="page-link" 
+                      href="?page={{products.next_page_number}}">التالي</a></li>
+                    {% else %}
+                    <li class="page-item disabled" ><a class="page-link" href="#" >التالي</a></li>
+                    {% endif%}
+                  </ul>
+                </nav>
+                  <!--end pagination-->
+          </div>
+     </div>
+     {% endif %}
+       <!--end paginator-->
+      
+  <!--end body-->
+  {%endblock body%}

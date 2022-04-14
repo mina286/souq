@@ -1,0 +1,140 @@
+{% load static %}
+
+  <!--start navbar1-->
+    <nav class="navbar navbar-expand-lg navbar-light " style="padding: 0px !important;">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+  
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'show_cart' %}">عربة التسوق
+              <div style="display: inline-block;" id="parent_cart">
+                <span style="display: inline-block;color: red;
+                 margin-right: -15px; position:absolute;font-weight: bold;"
+                  id="">        
+                 
+                  {% if request.session.sum_product_of_orderdetials == 'yes_true' %}
+                  0
+                  {% else %}
+                  {{request.session.sum_product_of_orderdetials}}
+                  {% endif %}
+                </span>               
+                <img id="img_car_shoping" src="{% static 'img/cart_shoppin.png' %}" 
+                class="img-responsive img-fluid mt-2" style="width: 30px;height:30px">
+
+              </div>
+               
+              </a>
+            </li>
+  
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'order_history' %}">مشترياتك</a>
+            </li>
+            <!--first dropdown-->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-4" style="display: block; font-size:13px;float:right" > مرحبا {{request.user.username}}:{{request.user.id}}
+                </span>
+                <span style="display: block; clear: both;">     الحسابات والقوائم         
+                </span>
+  
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if not request.user.is_authenticated and not request.user.is_ananymous %}
+                <div>
+                  <a class=" btn  w-100" style="text-align: center; background-color:rgb(209, 112, 22)" href="{%url 'login' %}">تسجيل الدخول</a>
+                  <a class="dropdown-item " style="font-size: 13px;color:blue;text-align: right;" href="{%url 'signup' %}">
+                  <span style="font-size: 12px;color:black">هل انت مستخدم جديد؟</span> ابدا من هنا </a>             
+                </div>
+                {% endif%}
+                <p class="text-center" style="font-weight: bold;"  >حسابك</p>
+                <a class="dropdown-item " style="text-align: right;" href="{% url 'all_accounts' %}">حسابك</a>
+                <a class="dropdown-item " style="text-align: right;" href="{% url 'order_history' %}">مشترياتك</a>
+                <a class="dropdown-item " style="text-align: right;" href="{% url 'address'  %}">عناوينك</a>
+                <a class="dropdown-item " style="text-align: right;" href="{% url 'show_favorite_product'%}">المفضلة</a>
+                <a class="dropdown-item " style="text-align: right;" href="{% url 'send_messages'%}">ارسال مقتراحات وشكواى  </a>
+                <a class="dropdown-item " style="text-align: right;" href="#">حساب البيع الخاص بك</a>
+                <a class="dropdown-item " style="text-align: right;" href="#">تبديل الحسابات</a>
+                {% if  request.user.is_authenticated and not request.user.is_ananymous %}
+
+                <a class="dropdown-item " style="text-align: right;" href="{%url 'logout_user'%}">تسجيل الخروج</a>
+                {%endif%}
+                
+              </div>
+            </li>
+            <!--second dropdown-->
+  
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="{% static 'img/egypt.png'%}" class="img-responsive img-fluid" style="width: 30px;height:30px">
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">AR - العربية</a>
+                <a class="dropdown-item" href="#">EN - الانجليزية</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#"> souq.com انت تتسوق على  </a>
+                <a class="dropdown-item" href="#">تغير البلد / المنطقة</a>
+  
+              </div>
+            </li>
+          
+          </ul>
+  
+              <form class="form-inline my-2 my-lg-0 border mr-2">
+                <div class="input-group is-invalid" style="direction: rtl;">
+                  <div class="custom-file">
+                    <select id="inputState" class="form-control">
+                      <option selected>الكل</option>
+                      <option>العاب فديو</option>
+                      <option>الكترونيات</option>
+                      <option>  مﻻبس حريمى</option>
+                      <option>  مﻻبس رجالى</option>
+  
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="inputEmail4">
+                  </div>
+                  <div class="input-group-append">
+                    <button class="btn btn-warning" style="border-radius: 5px;" type="submit"><i class="fas fa-search"></i></button>
+                  </div>
+                </div>
+              </form>
+        </div>
+        <a class="navbar-brand" href="#">
+          <span style="display: block; font-size:10px;" > 
+            التوصيل الى mina
+      
+          </span>  
+          <span style="display: block; font-size:13px; font-weight: bold;" > 
+            مدينة اكتوبر
+          </span>     
+         </a>
+  
+          <a class="navbar-brand ml-2" href="{% url 'home' %}">souq.com</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+        
+      </nav>
+          <!--end navbar1-->
+      <!--start navbar2-->
+      <div class="row pl-4 parent_navbar2"  style="background-color: rgb(233, 230, 227);">
+  
+        <a class="nav-link a_navbar2"  href="#">الدمى والالعاب</a>
+        <a class="nav-link a_navbar2"  href="#">العاب الفديو</a>
+        <a class="nav-link a_navbar2"  href="#">الكوبونات</a>
+        <a class="nav-link a_navbar2"  href="#">مستلزمات المنزل</a>
+        <a class="nav-link a_navbar2"  href="#">الاجهزه المنزلية</a>
+        <a class="nav-link a_navbar2"  href="#">الالكترونيات</a>
+        <a class="nav-link a_navbar2"  href="#">موبايلات</a>
+        <a class="nav-link a_navbar2"  href="#">عطور</a>
+        <a class="nav-link a_navbar2"  href="#">السوبر ماركت</a>
+        <a class="nav-link a_navbar2"  href="#">الموضة</a>
+        <a class="nav-link a_navbar2"  href="#">المساعدة</a>
+        <a class="nav-link a_navbar2"  href="#">عروض اليوم</a>
+  
+  
+      </div>
+      <!--end navbar2-->
+    

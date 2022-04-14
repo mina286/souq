@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block body %}
+<div class="row mt-4 " style="margin-bottom: 300px;">
+        {% for address in address %}
+        <div class="col-md-4">
+              <div class="card ">
+                <div class="card-header " style="display:flex;justify-content:right">
+                    <span>souq.com</span>
+                    <span style="margin-left: 15px;color:rgb(226, 109, 13);font-weight: bold;">
+                      {% if address.is_main_address %}رئيسي{% endif %}</span>                
+
+                </div>
+                <div class="card-body text-right">
+                  <h5 class="card-title">{{request.user.first_name}}
+                       {{request.user.last_name}}</h5>
+                  <div style="display: flex;flex-direction:row;justify-content:flex-end">
+                    <p class="card-text mr-1">{{address.Region}}</p>
+                    <p class="card-text mr-1">{{address.district}}</p>
+                    <p class="card-text mr-1">{{address.Street_name}}</p>
+                    <p class="card-text">{{address.Building_name_or_number}}</p>
+
+                  </div>
+                  <p class="card-text">{{address.country}}</p>
+                  <p class="card-text">{{address.phone_number}}</p>
+
+                  <a href="{% url 'main_address' address.id %}" class="btn btn-primary" >تحديد كعنوان رئيسي </a>
+                  <a href="{% url 'del_address' address.id %}" class="btn btn-primary">ازاله </a>
+                  <a href="{% url 'address_edit' address.id %}" class="btn btn-primary">تعديل </a>
+
+                </div>
+                
+              </div>
+        </div> 
+        {%endfor%}
+        <div class="col-md-4">
+            <a href="{% url 'add_address' %}" class="text-center">
+                <img src="{% static 'img/location.png'%}" class="img-responsive img-fluid" alt="" >
+                <span style="text-align: center;display: inline-block;margin-left:150px">اضافة عنوان</span>
+            </a>
+        </div> 
+        
+</div> 
+
+{% endblock body %}

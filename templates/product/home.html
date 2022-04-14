@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block body%}
+
+    <!--start body-->
+      <div class="row">
+           <!--START TEST-->
+          
+            {% for category in category_main %}
+            <div class="col-md-3">
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">{{category.CATname}}</h5>
+
+                  <a class="card-text" href="{% url 'category_page' category.id %}">
+                    <img src="{{category.CATimage.url}}" style="width:100%;height: 200px; margin-bottom: 10px;" class="card-img" alt="...">
+
+                  <a href="{% url 'category_page' category.id %}" class="card-link float-right">تسوق الان </a>
+                </div>
+              </div>
+              </div>
+              {% endfor %}
+             
+              <!--END TEST-->
+
+      </div>
+    <!--end body-->
+
+
+{%endblock body%}
+
+

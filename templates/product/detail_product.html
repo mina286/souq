@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block body%}
+{% include 'partials/_alert.html'%}
+        <!--start body-->
+<div class="row p-3">
+        <!--start part1 buy-->
+
+            <div class="col-md-4 border pt-4" style="text-align: right;">
+                <p style="display: inline-block" >
+                  {% if product.PRDdiscountprice > 0 %}
+                  <p style="display: inline-block;">جنيه</p> 
+                  <p style="display: inline-block; ">{{product.PRDdiscountprice}}</p>
+                  <p style="display: inline-block;margin-right: 10px;" >
+                    <p style="display: inline-block;">جنيه</p> 
+                    <p style="display: inline-block; color:chocolate;text-decoration: line-through;">{{product.PRDprice}}</p>
+                   
+                  </p>
+                  {%elif product.PRDprice %}
+                  <p style="display: inline-block" >
+                    <p style="display: inline-block;">جنيه</p> 
+                    <p style="display: inline-block; ">{{product.PRDprice}}</p>
+                   
+                  </p>
+                  {% endif %}
+                </p>
+               
+        
+
+                <p>التوصيل الي القاهرة </p>
+                الكمية={{product.PRDquantity|default:'غير معروف'}}
+               
+                <form action="{% url 'add_to_cart' product.id %}" method="get" >               
+                  {% if product.PRDquantity > 1 %}
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">الكمية </label>
+                    <select name="select_quntity" class="form-control" id="exampleFormControlSelect1">
+                      {% for qnt in quantity|slice:'0:10' %}
+                      <option value="{{qnt}}">{{qnt}}</option>
+                      {% endfor %}
+                      
+                    </select>
+                  </div>
+                {%endif%}
+                
+                {% if product.PRDquantity == 1 or product.PRDquantity == None %}
+                
+                   
+                    <h5 style="color:green;margin-bottom: 10px;"><input type="hidden" value="1" name="select_quntity">تبقي 1 فقط -اطلبة الان </h5>
+                {%endif%}
+                <button name="btn_addcart" type="submit" 
+                class="btn btn-block" 
+                style="display:block;color: white;padding:5px;text-align: center;text-decoration: none; background-color:rgb(199, 102, 23)">اضف الى عربة التسوق</button>
+                <input type="hidden" name="quantity_from_detailproduct">
+
+              </form>
+                <form action="{% url 'add_favorite_product' product.id %}" method="get">
+                  <button
+                   name="favorite_product" class="btn mt-3 btn-block" style="display:block;color: white;padding:5px;text-align: center;
+                   text-decoration: none; background-color:rgb(199, 102, 23)">اضف الى  المفضلة</button>
+
+                </form>
+               <!-- sart review-->
+                <form method="get" action="" class="mt-4 text-center" style="padding: 0px;">
+
+                  <div class="form-check form-check-inline">
+                    <input value="1" class="form-check-input" type="radio" name="star" id="inlineRadio1" value="option1">
+                    <label class="form-check-label" for="inlineRadio1"><i style="color:rgb(199, 102, 23)" class="fas fa-star"></i></label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input value="2" class="form-check-input" type="radio" name="star" id="inlineRadio1" value="option1">
+                    <label class="form-check-label" for="inlineRadio1">
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 15px;" class="fas fa-star fa-1x	" ></i>
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 15px;" class="fas fa-star fa-1x	" ></i>
+
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input value="3" class="form-check-input" type="radio" name="star" id="inlineRadio1" value="option1">
+                    <label class="form-check-label" for="inlineRadio1">
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 13px;" class="fas fa-star fa-1x	" ></i>
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 13px;" class="fas fa-star fa-1x	" ></i>
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 13px;" class="fas fa-star fa-1x	" ></i>
+
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input value="4" class="form-check-input" type="radio" name="star" id="inlineRadio1" value="option1">
+                    <label class="form-check-label" for="inlineRadio1">
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+                      <br>
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input value="5" class="form-check-input" type="radio" name="star" id="inlineRadio1" value="option1">
+                    <label class="form-check-label" for="inlineRadio1">
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 10px;" class="fas fa-star fa-1x	" ></i>
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+                      <br>
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+                      <i  style="color:rgb(199, 102, 23) ;font-size: 12px;" class="fas fa-star fa-1x	" ></i>
+
+                    </label>
+                  </div>
+                 <br>
+                 
+                  <button name="btn_addreviw" class="btn" style="background-color:rgb(199, 102, 23)">اضف تقيم</button>
+                </form>
+                    <!-- end review-->
+
+            </div>
+        <!--end part1 buy-->
+        <!--start part1 images-->
+          
+            <div class="col-md-8" style="text-align: right; ">
+              {% if product.PRDisnew %}
+              <a class="btn btn-primary" href="">new</a>
+              {% endif %}
+              {% if product.PRDdiscountprice > 0 %}
+              <a class="btn " style="background-color: green; color:white" href="">sale</a>
+              {% endif %}
+              {% if product.PRDisbeatsaller %}     
+              <a class="btn " style="background-color: red; color:white" href="">bestsaller</a>
+              {% endif %}
+
+
+                  <div class="row" style="float: right;">
+                       
+                        <div style="display: inline-block;">
+                            <div cls="parent_images">
+                                <div style="display: inline-block;">
+                                  {% for ip in product.image_set.all|slice:':2'%}
+                                  <img src="{{ip.PRDIimage.url}}" alt="" style="height:80px;margin-bottom: 10px;width:80px;display:block;
+                                  ;border: 1px solid rgb(216, 139, 23);">
+                                    {% endfor %}
+                                </div>
+                                
+                                <div style="display: inline-block;">
+                                  {% if product.PRDimage  %}
+                                  <img src="{{product.PRDimage.url}}" alt="" style="height:350px;margin-bottom: 10px;width:200px;display:inline-block">
+                                    {%else%}
+                                    <img src="{% static 'default_image/img_product/no image here.png'%}" alt="" style="height:350px;margin-bottom: 10px;width:200px;display:inline-block">
+                                  {% endif%}
+
+                                </div>
+                            </div>
+
+                            <h4 style="font-weight: bold; font-size: 20px;">  {{product.PRDname}}</h4> 
+                            <h5 style="font-weight: bold;font-size: 17px;"> {{product.category}}</h5>    
+   
+                            <h5> {{product.PRDdesc}}</h5>                                     
+                                 
+                            <p>
+                              العلامة التجارية:  {{product.brand|default:'غير معروف' }}
+                            </p>  
+                        </div>
+                       
+                       
+                  </div>
+            
+            </div>
+            <!--end part1 images-->
+
+
+</div>
+
+
+      <!--end body-->
+  {%endblock body%}
+
+  

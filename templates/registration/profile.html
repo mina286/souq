@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block body %}
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        {% if request.user.profile.slug in request.path and request.user.is_authenticated and  not request.user.is_ananymous%}
+             <div class="col-md-3 border-right">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        {% if mypofile.image %}
+                        
+                        <img class="rounded-circle mt-5" width="150px" src="{{mypofile.image.url}}">
+                        {%else%}
+                        <img class="rounded-circle mt-5" width="150px" src="  {% static 'default_image/img_product/no image here.png'%}">
+
+                        {% endif %}
+
+                        <span class="font-weight-bold">{{mypofile.user.first_name}}</span>
+                        {% if mypofile.user.email %}
+                        <span class="text-black-50">{{mypofile.user.email}}</span>
+                        {% endif %}
+                        <span> </span></div>
+                </div>
+                <div class="col-md-5 border-right">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right"> البيانات الشخصية</h4>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6"><label class="labels">First name</label>
+                        <p> {{mypofile.user.username}}</p>
+                            </div>
+                            <div class="col-md-6"><label class="labels">Last name</label>
+                            <p>{{mypofile.user.last_name}}</p>
+                        </div>
+                        </div>
+                    
+                    
+                    </div>
+                </div>
+        {%else%}
+        <div class="col-md-5 border-right">
+            <p style="font-weight: bold; color:red">غير مسموح لك بالوصول لهذه الصفحة</p>
+        </div>
+        {%endif%}
+    </div>
+</div>
+{% endblock body%}

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block body%}
+        <!--start body-->
+      <div class="container-fluid">
+            <div class="row p-5">
+                <!--start slide left-->
+                <div class="col-md-3 border">
+                  <p class="mt-3" style="font-weight: bold; text-align:center"> المجموع الفرعى
+                    <span  id=""> 
+                      {% if orderdetails %}
+                      {{request.session.sum_product_of_orderdetials}} منتج 
+                      {% else %}
+                      منتج 0
+                      {% endif %}
+                    </span>               
+                  </p>
+                  <p style="font-weight: bold; text-align:center">
+                    {% if orderdetails %}
+                    {{sum_price}} 
+                    جنية{% else %}
+                     0 جنية
+                    {% endif %}
+                  </p>
+                  <a href="{% url 'buy_addressselecte' %}" 
+                  style="color:white;display:block;text-align:center;border-radius: 5px;
+                  padding:5px;background-color: rgb(202, 144, 19); text-decoration:none">تباع عملية الشراء</a>
+                </div>
+                <!--end slide left-->
+
+                <!--start slide right-->
+                <div class="col-md-9">
+                  <h5 class="mb-3" style="text-align: right; font-weight: bold;">عربة التسوق</h5>
+                  {% include 'partials/_alert.html'%}
+                        {% if orderdetails %}
+                        <div class="row">
+
+                                {% for  one_orderdetails in orderdetails %}
+                                <div class="col-md-12 border" 
+                                {% if one_orderdetails.is_showin_cart == False %}
+                                   style="text-align: right; opacity: .5"     
+                                   {%else%}    
+                                   style="text-align: right;"                         
+                                  {% endif %}
+                                >                                                           
+                                  {% if one_orderdetails.is_showin_cart == False %}
+                                  
+                                  {% endif %}
+                                
+                                    <div style="display: inline-block; margin-right:15px">
+                                    
+                                        <div>
+                                          
+                                            <a href="{% url 'delete_product_cart' one_orderdetails.product.id %}" class="btn btn-primary"
+                                            style="color:black;display: inline-block;font-size:15px;text-decoration: none;
+                                             margin-right: 50px;margin-left: 50px;">حذف
+                                             </a>
+                                             
+                                        </div>
+                                       
+                                    </div>
+                                    <div style="display: inline-block;">
+                                        <p style="font-weight: bold;" class="mt-3">  
+                                            {{one_orderdetails.product.PRDname}} <span class="" 
+                                            style="margin-right: 20px;">{{one_orderdetails.ODprice}} جنية</span>
+                                        </p>
+                                        
+                                        <img src="{{one_orderdetails.product.PRDimage.url}}" 
+                                        style="display:inline-block;width: 150px;height:150px" alt="">
+                                          <!--start is caaive-->
+                                        <form  action="{% url 'active_product_cart' one_orderdetails.product.id %}" class="ml-4" method="get" style="display: inline-block;">                                
+                                          
+                                          <input {% if one_orderdetails.is_showin_cart == True %}checked{%endif%} 
+                                          onchange="submit()" name="status_active" style="width: 20px;height:35px"  
+                                          type="checkbox" class="form-check-input " value="{{one_orderdetails.is_showin_cart}}" id="exampleCheck1">   
+                                        </form>
+                                         <!--end is active -->
+
+                                        <!--start change quantity-->
+                                        <form action="{% url 'add_to_cart' one_orderdetails.product.id %}" method="get" >               
+                                            {% if one_orderdetails.product.PRDquantity > 1 %}
+                                            <div class="form-group">
+                                              <label for="exampleFormControlSelect1">الكمية </label>
+                                              
+                                              <select onchange="submit()" name="select_quntity" class="form-control" id="exampleFormControlSelect1">
+                                                {% for qnt in quantity|slice:'0:10' %}
+                                                                                                                                             
+                                                <option value="{{qnt}}"
+                                                {% if qnt == one_orderdetails.ODquantity %}selected{% endif %}>
+                                                {{qnt}}</option>
+                                                {% endfor %}
+
+                                              </select>
+                                            </div>
+                                          {%endif%}
+                                          
+                                          {% if one_orderdetails.product.PRDquantity == 1 or one_orderdetails.product.PRDquantity == None %}
+                                          
+                                             
+                                              <h5 style="color:green;margin-bottom: 10px;"><input type="hidden" value="1" name="select_quntity">تبقي 1 فقط -اطلبة الان </h5>
+                                          {%endif%}
+                                          <input type="hidden" name="btn_addcart">
+                                          <input type="hidden" name="quantity_from_cart">
+
+                                        </form>
+                                        <!--end change quantity-->
+
+                                    </div>
+
+                                </div>
+                                {% endfor %}
+
+                                
+                        </div>
+                        {% else %}
+                        <p class="border p-3" style="text-align: right; font-weight: bold;" >لا يوجد منتجات فى عربة التسوق</p>
+                        {% endif%}
+                </div>
+                <!--end slide right-->
+
+
+            </div>
+      </div>
+
+      <!--end body-->
+{%endblock body%}
+
+  
+  

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block body%}
+
+    <!--start body-->
+    <div class="container-fluid">
+        <h4 style="text-align:right;margin-right:100px;" class="mt-3 mb-3">  اختر عنوان شحن </h4>
+        <div class="row">
+            <div class="col-md-3 border">     
+                   
+                <a name="btn_addcart" href=""
+                class="btn btn-block mt-3" 
+                style="display:block;color: white;padding:5px;text-align: center;
+                text-decoration: none; background-color:rgb(199, 102, 23)">   استخدم هذا العنوان</a>
+                <p class="mt-1" style="text-align:center">اختر عنوان الشحن لمتابعة إتمام عملية الشراء. سيظل بإمكانك معاينة وتعديل طلبك قبل أن يكون نهائياً.</p>
+                <h5 style="text-align: right;">ملخص الطلب  </h5>
+                <p class="mt-1" style="text-align:right">السلع:<span>{{order.total_order}} جنية</span></p>
+
+
+            </div> 
+
+            <div class="col-md-9 border">        
+                <h4 style="text-align:right;margin-right:100px;" class="mt-3 mb-3">عناوينك</h4>
+                <form action="" style="text-align:right"  class="w-100 border p-2">
+                    {% for address in address%}
+
+                    <div class="form-check" >
+                        <a style="text-align:left;
+                        text-decoration: none;color:rgb(25, 80, 184)" href="{% url 'address_edit' address.id%}"> تعديل</a>
+
+                        <label class="form-check-label mr-4" for="exampleRadios1" style="display: inline-block;">
+                            {{address.country}}- {{address.Governorate}}-
+                            {{address.Street_name}}-{{address.Building_name_or_number}}-{{address.phone_number}}
+
+                          </label>
+                        <input  class="form-check-input" type="radio"  name="exampleRadios" id="exampleRadios1" value="option1" checked>
+
+                      </div>
+                     
+                    {% endfor %}
+
+                </form>  
+                <div style="text-align: right;" class="mr-2 mt-2">
+                    <a style="text-decoration: none;color:black" href="{% url 'add_address' %}">+اضف عنوان جديد</a>
+                </div>
+            </div>   
+            <div class="col-md-3 ">           
+             </div>   
+
+            <div class="col-md-9 border p-0 pr-3" style="background-color: rgb(186, 190, 195);">       
+                <a  href=""
+                class="btn  mt-3" 
+                style="display:block;color: white;padding:5px;text-align: center;
+                text-decoration: none; background-color:rgb(199, 102, 23);width:150px;float:right">   استخدم هذا العنوان</a>
+            </div>    
+
+        </div>    
+    </div>    
+
+{% endblock body%}

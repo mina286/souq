@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block body %}
+<div class="row mt-4 " style="margin-bottom: 300px;">
+    <div class="col-md-3">
+          </div> 
+            <div class="col-md-6" style="text-align:right">
+                
+                <form method="get" action="" enctype="multipart/form-data" >
+                    <h5 class="mt-4" style="text-align: right;">  اضافة عنوان جديد </h5>
+                    {% bootstrap_form addressforms %}
+                   <p>إضافة تعليمات التوصيل (اختياري)</p>
+                   <div  style="display: flex;">
+                        <div class="border w-50">
+                            <div class="form-check form-check-inline" id="=parent_work">
+                                <input class="form-check-input" type="radio" name="rd" id="work" value="work" 
+                                >
+                                <label style="font-size :14px;" class="form-check-label" for="inlineRadio2">المكتب التوصيل من الاحد للخميس - صباحًا 9 - 6 مساءً
+                                </label>
+                            </div>
+                            <div id="dayf_s" >
+                                <p style="font-size :14px;">هل مكتبك مفتوح في عطلة نهاية الأسبوع؟
+
+                                </p>
+                                <div class="form-check form-check-inline starday">
+                                    <input  class="form-check-input" name="starday" type="checkbox" id="inlineCheckbox1" value="starday">
+                                    <label class="form-check-label " for="inlineCheckbox1">السبت</label>
+                                  </div>
+                                  <div class="form-check form-check-inline fridaye">
+                                    <input  class="form-check-input" name="fridaye" type="checkbox" id="inlineCheckbox2" value="fridaye">
+                                    <label class="form-check-label" for="inlineCheckbox2">الجمعة</label>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="border w-50" >
+                            <div class="form-check form-check-inline" id="=parent_home">
+                                <input  class="form-check-input" type="radio" name="rd" id="home" value="home">
+                                <label style="font-size :14px;" class="form-check-label" for="inlineRadio1">المنزل (7 صباحًا - 9 مساءً، كل الأيام)</label>
+                              </div>
+                        </div>
+                   </div>
+                  
+                      <br>
+                    <button class="btn btn-primary" name="btn_addaddress">اضافة</button>
+                  </form>
+                
+                </div> 
+        <div class="col-md-3">
+        
+            </div> 
+                        
+</div>
+{% endblock body%}

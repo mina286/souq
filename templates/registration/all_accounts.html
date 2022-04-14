@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+  <div class="row mt-4 " style="margin-bottom: 300px;">
+      <div class="col-md-4">
+          <div class="card w-75">
+            <div class="card-body">
+              <a href="{% url 'profile' request.user.username %}" class="" style="text-decoration: none;">
+                <h5 class="card-title text-center" style="color:black;"> الصفحه الشخصية</h5>
+                <div style="display:flex">
+                  <p class="card-text" style="color:black;">بينات الصفحه الشخصية الخاصه بك</p>
+                  {% if request.user.profile.image %}
+                  <img src="{{request.user.profile.image.url}}" 
+                  class="img-responsive img-fluid" 
+                  style="color:black;width: 70px;height:70px;border-radius:30px;border:1px solid gray;">
+                  {%else%}
+                  <img src="  {% static 'default_image/img_product/no image here.png'%}" 
+                  class="img-responsive img-fluid" 
+                  style="color:black;width: 70px;height:70px;border-radius:30px;border:1px solid gray;">
+                  {%endif%}
+                </div>
+               
+              </a>
+            </div>
+          </div>
+      </div> 
+
+       <div class="col-md-4">
+        <div class="card w-75">
+          <div class="card-body">
+            <a href="{% url 'profile_edit' request.user.username %}" class="" style="text-decoration: none;">
+              <h5 class="card-title text-center" style="color:black;"> تعديل الصفحه الشخصية</h5>
+              <div style="display:flex">
+                <p class="card-text" style="color:black;">بينات الصفحه الشخصية الخاصه بك</p>
+                {% if request.user.profile.image %}
+                <img src="{{request.user.profile.image.url}}" 
+                class="img-responsive img-fluid" 
+                style="color:black;width: 50px;height:50px;border-radius:30px;border:1px solid gray;">
+                {%else%}
+                <img src="  {% static 'default_image/img_product/no image here.png'%}" 
+                class="img-responsive img-fluid" 
+                style="color:black;width: 70px;height:70px;border-radius:30px;border:1px solid gray;">
+              {%endif%}
+              </div>
+             
+            </a>
+          </div>
+        </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card w-75">
+            <div class="card-body">
+              <a href="{% url 'address'  %}" class="" style="text-decoration: none;">
+                <h5 class="card-title text-center" style="color:black;">   عناوينك</h5>
+                <div style="display:flex">
+                  <p class="card-text" style="color:black;">  العناوين الخاصه بك</p>
+                 
+                  <img src="  {% static 'img/home.jpeg'%}" 
+                  class="img-responsive img-fluid" 
+                  style="color:black;width: 70px;height:70px;border-radius:30px;border:1px solid gray;margin-left: 50px;">
+                
+                </div>
+               
+              </a>
+            </div>
+          </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="card w-75">
+              <div class="card-body">
+                <a href="{% url 'password_change'  %}" class="" style="text-decoration: none;">
+                  <h5 class="card-title text-center" style="color:black;">   تسجيل الدخول والامان</h5>
+                  <div style="display:flex">
+                    <p class="card-text" style="color:black;"> تعديل كلمه السر</p>
+                   
+                    <img src="  {% static 'img/security.jpeg'%}" 
+                    class="img-responsive img-fluid" 
+                    style="color:black;width: 70px;height:70px;border-radius:30px;border:1px solid gray;margin-left: 50px;">
+                  
+                  </div>
+                 
+                </a>
+              </div>
+            </div>
+            </div>
+  
+  </div>
+{% endblock body%}
